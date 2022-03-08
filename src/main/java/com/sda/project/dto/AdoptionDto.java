@@ -13,10 +13,12 @@ import lombok.Setter;
 @Setter
 public class AdoptionDto {
 
+    // userId
     private User user;
     private String date;
     private String address;
     private String socialSecurityNumber;
+    // petId
     private Pet pet;
 
     public Pet getPet() {
