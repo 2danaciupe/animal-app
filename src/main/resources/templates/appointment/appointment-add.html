@@ -19,31 +19,33 @@
     <form class="px-md-0" method="post" th:action="@{/appointments/add}" th:object="${appointmentDto}">
 
         <div class="form-outline mb-0">
-            <label class="form-label" for="firstName">First name</label>
+            <label class="form-label" for="firstName"><b>First name</b></label>
             <input class="form-control" id="firstName" th:field="${loggedUser.firstName}" type="text"/>
         </div>
 
         <div class="form-outline mb-2">
-            <label class="form-label" for="lastName">Last name</label>
+            <label class="form-label" for="lastName"><b>Last name</b></label>
             <input class="form-control" id="lastName" th:field="${loggedUser.lastName}" type="text"/>
         </div>
 
         <div class="form-outline mb-2">
-            <label class="form-label" for="appointment-date">Date</label>
+            <label class="form-label" for="appointment-date"><b>Date</b></label>
             <input class="form-select" id="appointment-date" th:field="${appointmentDto.date}" type="datetime-local">
             <!--               th:text="${#temporals.format(localDateTime, 'yyyy,mm,dd,hh,mm')}">-->
 
         </div>
 
         <!--    check box with multiple choices-->
-        <!--    //TODO cum facem ca userul sa poata bifa doar 2 animale din toata lista?-->
-            <th:block th:each="pet : ${pets}" >
-                <input type="checkbox" name="selectedActive" th:text="${pet.name}" th:value="${pet.id}" th:field="${appointmentDto.pets}">
-                <label  th:value="${pet.id}"></label>
+
+            <th:block th:each="petName : ${appointmentDto.petsNames}" >
+                <input type="checkbox" id="pets-names" name="selectedActive" th:text="${petName}" th:value="${petName}"
+                       th:field="${appointmentDto.petsNames}">
+                <label for="pets-names" th:field="${appointmentDto.petsNames}" ></label>
                 <br/>
             </th:block>
 
-        <div class="d-grid gap-2 col-6 mx-auto">
+
+        <div class="d-lg-flex gap-2 col-xl-12 my-xxl-5 form-outline mb-4">
 
             <button class="btn btn-success" id="save" type="submit" width="30px">Add appointment</button>
 

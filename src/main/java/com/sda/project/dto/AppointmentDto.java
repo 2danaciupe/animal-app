@@ -19,10 +19,9 @@ import java.util.Set;
 public class AppointmentDto {
 
     private User user;
-
-    private Set<Pet> pets;
-
+    private Set<String> petsNames;
     private String date;
+
 
     public User getUser() {
         return user;
@@ -32,11 +31,11 @@ public class AppointmentDto {
         this.user = user;
     }
 
-    public Set<Pet> getPets() {
-        return pets;
+    public Set<String> getPets() {
+        return petsNames;
     }
 
-    public void setPets(Set<Pet> pets) {
-        this.pets = pets;
+    public void setPetsNames(Set<String> petsNames) {
+        this.petsNames = petsNames;
     }
 }

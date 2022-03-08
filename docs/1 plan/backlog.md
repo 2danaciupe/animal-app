@@ -12,10 +12,11 @@
 
 ## admin
     admin can create, update, delete data
-
     admin can confirm the appointments and adoptions
-## pet
+
+## pets
     can be filtered by category, name
+    have a description and they can be visited and adopted
 
 ## appointment
     can be filtered by date, type
@@ -45,9 +46,9 @@
 
 ## register
 - view register page
-- register with email and password ?
+- register with first name, last name, email and password 
 - login with email and password
-- logout ?
+- logout 
 
 ## forgot password
 - view forgot password page ?
@@ -59,7 +60,7 @@
 
 ## manage donations
 - view donation page and form
-- submit donation (with confirmation)
+- submit donation 
 
 ## manage adoptions
 - view adoption page and form
@@ -67,7 +68,6 @@
 
 ## manage user
 - view users page
-- update user info
 - view user donations history
 - view adopted pets list (info)
 

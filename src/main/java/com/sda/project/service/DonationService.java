@@ -4,6 +4,7 @@ import com.sda.project.dto.AddDonation;
 import com.sda.project.dto.DonationInfo;
 import com.sda.project.mapper.DonationMapper;
 import com.sda.project.model.Donation;
+import com.sda.project.model.Product;
 import com.sda.project.model.User;
 import com.sda.project.repository.DonationRepository;
 import com.sda.project.repository.UserRepository;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.webjars.NotFoundException;
 
 import java.util.List;
@@ -41,6 +43,9 @@ public class DonationService {
     public void save(AddDonation addDonation) {
         User loggedUser = userService.findLoggedUser();
         Donation donationToSave = donationMapper.mapToDonation(addDonation, loggedUser);
+        if (donationToSave.getProduct().equals(Product.MONEY)) {
+            donationToSave.setDetails("transfer");
+        }
         donationRepository.save(donationToSave);
     }
 
@@ -50,26 +55,11 @@ public class DonationService {
                         .mapToDonationAddDto(donation)).collect(Collectors.toList());
     }
 
-    //TODO use service
-    public Set<AddDonation> findDonationsByUserId(Long userId) {
-        User user = userRepository.findById(userId).orElseThrow(() -> new NotFoundException("user not found"));
-        return user.getDonations().stream()
-                .map(donation -> donationMapper.mapToDonationAddDto(donation))
-                .collect(Collectors.toSet());
-    }
-
-    public AddDonation ceva() {
-        // find current user id
-        Long currentUserId = 1L;
-
-        // set current user id on dto
-        return new AddDonation(currentUserId, null, null);
-    }
-
     public Set<DonationInfo> findDonationByUser(User user) {
-       return donationRepository.findAll().stream()
+        return donationRepository.findAll().stream()
                 .filter(donation -> donation.getUser().equals(user))
-               .map(donation -> donationMapper.mapFromDonationToDonationInfo(donation))
+                .map(donation -> donationMapper.mapFromDonationToDonationInfo(donation))
                 .collect(Collectors.toSet());
     }
+
 }

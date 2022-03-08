@@ -7,13 +7,18 @@
 
 <body>
 <div th:replace="fragments/header-admin :: navbar"/>
+
 <div class="container-fluid">
     <div class="container">
         <table class="table" method="get" th:action="@{/adoptions}" th:object="${adoptions}">
+            <div class="container-sm" style="background-color: #8fc4b7; border-radius: 25px">
+                <div class="row gx-5" style="text-align: center"><b> ADOPTIONS </b></div>
+            </div>
             <!-- table header -->
             <thead>
                 <tr>
                     <th scope="col">Date</th>
+                    <th scope="col">User</th>
                     <th scope="col">Address</th>
                     <th scope="col">Social security number</th>
                     <th scope="col">Pet</th>
@@ -24,6 +29,8 @@
             <tbody>
                 <tr th:each="adoption : ${adoptions}">
                     <td th:text="${adoption.date}"></td>
+                    <td th:text="|${adoption.user.firstName} ${adoption.user.lastName}|"></td>
+
                     <td th:text="${adoption.address}"></td>
                     <td th:text="${adoption.socialSecurityNumber}"></td>
                     <td th:text="${adoption.pet.name}"></td>
